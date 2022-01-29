@@ -9,5 +9,7 @@
 
 ## Viikkoraportit
 [Viikko1](https://github.com/hzville/Tietorakenteet-ja-algoritmit-harjoitustyo-2022/blob/master/dokumentaatio/viikkoraportti1.md)
+
+
 [Viikko2](https://github.com/hzville/Tietorakenteet-ja-algoritmit-harjoitustyo-2022/blob/master/dokumentaatio/viikkoraportti2.md)
 
