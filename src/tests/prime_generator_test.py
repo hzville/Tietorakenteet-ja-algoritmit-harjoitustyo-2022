@@ -1,5 +1,7 @@
 import unittest
 from components.prime_generator import PrimeGenerator
+from tests.test_data.list_of_primes import list_of_primes
+from tests.test_data.list_of_composite_numbers import list_of_composite_numbers
 
 class TestPrimeGenerator(unittest.TestCase):
     def setUp(self):
@@ -36,3 +38,10 @@ class TestPrimeGenerator(unittest.TestCase):
         result = self.prime_generator.check_if_prime(2)
         self.assertEqual(result, True)
 
+    def test_check_known_prime_numbers(self):
+        for prime in list_of_primes:
+            self.assertEqual(self.prime_generator.check_if_prime(prime), True)
+    
+    def test_check_known_composite_numbers(self):
+        for composite in list_of_composite_numbers:
+            self.assertEqual(self.prime_generator.check_if_prime(composite), False)
