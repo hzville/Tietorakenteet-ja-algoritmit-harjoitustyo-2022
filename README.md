@@ -7,9 +7,17 @@
 ## Dokumentaatio
 [Määrittelydokumentti](https://github.com/hzville/Tietorakenteet-ja-algoritmit-harjoitustyo-2022/blob/master/dokumentaatio/maarittelydokumentti.md)
 
+
+[Testausdokumentti](https://github.com/hzville/Tietorakenteet-ja-algoritmit-harjoitustyo-2022/blob/master/dokumentaatio/testausdokumentti.md)
+
+
 ## Viikkoraportit
 [Viikko1](https://github.com/hzville/Tietorakenteet-ja-algoritmit-harjoitustyo-2022/blob/master/dokumentaatio/viikkoraportti1.md)
 
 
 [Viikko2](https://github.com/hzville/Tietorakenteet-ja-algoritmit-harjoitustyo-2022/blob/master/dokumentaatio/viikkoraportti2.md)
+
+
+[Viikko3](https://github.com/hzville/Tietorakenteet-ja-algoritmit-harjoitustyo-2022/blob/master/dokumentaatio/viikkoraportti3.md)
+
 
