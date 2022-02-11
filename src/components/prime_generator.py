@@ -45,7 +45,7 @@ class PrimeGenerator:
         if prime_candidate in [2,3]:
             return True
 
-        if prime_candidate % 2 == 0:
+        if prime_candidate % 2 == 0 or prime_candidate < 2:
             return False
 
         multiplier = prime_candidate -1
