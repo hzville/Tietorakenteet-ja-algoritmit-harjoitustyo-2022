@@ -50,3 +50,7 @@ poetry run invoke test
 [Viikko4](https://github.com/hzville/Tietorakenteet-ja-algoritmit-harjoitustyo-2022/blob/master/dokumentaatio/viikkoraportti4.md)
 
 
+[Viikko5](https://github.com/hzville/Tietorakenteet-ja-algoritmit-harjoitustyo-2022/blob/master/dokumentaatio/viikkoraportti5.md)
+
+
+
