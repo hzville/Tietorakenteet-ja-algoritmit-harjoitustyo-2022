@@ -19,3 +19,16 @@ Tällöin projektin juurikansiosta löytyvän 'htmlcov' kansioon generoituu 'ind
 Seuraavaksi kuva kyseisestä raportista:
 
 ![coverage-report](./coverage-report.png)
+
+
+## Suorituskykytestaus
+
+Ohjelman suorituskykyä testattiin luomalla erikokoisia avaimia. Ohjelman suorituskyky ja nopeus on riippuvainen avaimien pituudesta. Mitä pidempi avain on, sitä turvallisempi salaus on. Tämä ohjelma käyttää 1024-bittisiä avaimia. 
+
+Alla keskimääräinen aika avaimen luomiseen, riippuen avaimen pituudesta:
+
+1024-bit: 0.72 sek.
+
+2048-bit: 5.22 sek.
+
+4096-bit: 32.67 sek.
