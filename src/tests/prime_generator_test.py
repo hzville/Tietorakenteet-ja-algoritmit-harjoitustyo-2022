@@ -10,10 +10,6 @@ class TestPrimeGenerator(unittest.TestCase):
     def test_new_prime_generator_size_is_none(self):
         self.assertEqual(self.prime_generator.size, None)
 
-    def test_random_number_generator(self):
-        result = self.prime_generator.generate_random_number(4)
-        self.assertLess(result, 16)
-
     def test_get_new_prime(self):
         prime_candidate = self.prime_generator.get_new_prime(4)
         if prime_candidate == 2:

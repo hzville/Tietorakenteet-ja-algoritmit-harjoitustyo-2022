@@ -1,14 +1,12 @@
-from operator import mod
-
 
 class PublicKey:
     ''' Luokka jolla määritellään julkinen avain.
-    Attributes: 
+    Attributes:
         modulus:  avaimen modulaarinen arvo, tarvittava laskennallinen arvo
         exponent: avaimen eksponentti, tarvittava laskennallinen arvo'''
 
     def __init__(self, modulus, exponent):
-        '''Konstruktori joka luo uuden julkisen avaimen. 
+        '''Konstruktori joka luo uuden julkisen avaimen.
         Alustaa modulaarin ja exponentin arvon'''
         self.modulus = modulus
         self.exponent = exponent
@@ -17,7 +15,7 @@ class PublicKey:
         ''' Palauttaa avaimen modulaarisen arvon
         Returns: avaimen modulaarisen arvon'''
         return self.modulus
-    
+
     def get_exponent(self):
         ''' Palauttaa avaimen eksponentin arvon
         Returns: avaimen eksponentin arvon'''

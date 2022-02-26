@@ -20,18 +20,10 @@ class PrimeGenerator:
         self.size = size
 
         while True:
-            prime_candidate = self.generate_random_number(self.size)
+            prime_candidate = random.getrandbits(size)
 
             if self.check_if_prime(prime_candidate):
                 return prime_candidate
-
-    def generate_random_number(self, size):
-        ''' Luo satunnaisen numeron annetun pituuden mukaan
-        Args:
-            size: halutun luvun pituus biteissä
-        Returns:
-            satunnaisen luvun halutulla pituudella'''
-        return random.getrandbits(size)
 
     def check_if_prime(self, prime_candidate):
         ''' Tarkistaa onko annettu luku alkuluku

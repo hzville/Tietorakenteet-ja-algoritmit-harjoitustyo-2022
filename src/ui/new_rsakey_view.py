@@ -32,7 +32,7 @@ class NewRsaKeyView:
         create_main_view_button.grid(row=4, column=2)
 
     def create_inputs(self):
-        key_name_entry = Entry(master=self.frame, textvariable=self.key_name_var) 
+        key_name_entry = Entry(master=self.frame, textvariable=self.key_name_var)
 
         key_name_entry.grid(row=2, column=1)
     def create_new_rsakey(self):
@@ -41,6 +41,6 @@ class NewRsaKeyView:
 
     def pack(self):
         self.frame.pack(fill=constants.X)
-    
+
     def destroy(self):
         self.frame.destroy()
