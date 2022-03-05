@@ -32,9 +32,9 @@ class TestCertificateModule(unittest.TestCase):
         )
         with open(self.certificate_path+self.name.lower(), 'r') as new_file:
             json_data = json.load(new_file)
-            self.assertEqual(json_data['Opiskelijapassi'][0]['Nimi'], self.name)
-            self.assertEqual(json_data['Opiskelijapassi'][1]['Oppilaitos'], self.academy)
-            self.assertEqual(json_data['Opiskelijapassi'][2]['Opiskelijanumero'], self.student_number)
-            self.assertEqual(json_data['Opiskelijapassi'][3]['Voimassaolo'], self.certificate_validity)
-            self.assertNotEqual(json_data['Allekirjoitus'], None)
+            self.assertEqual(json_data['opiskelijapassi']['nimi'], self.name)
+            self.assertEqual(json_data['opiskelijapassi']['oppilaitos'], self.academy)
+            self.assertEqual(json_data['opiskelijapassi']['opiskelijanumero'], self.student_number)
+            self.assertEqual(json_data['opiskelijapassi']['voimassaolo'], self.certificate_validity)
+            self.assertNotEqual(json_data['allekirjoitus'], None)
 

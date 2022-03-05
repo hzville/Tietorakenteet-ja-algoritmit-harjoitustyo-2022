@@ -62,25 +62,29 @@ class RsaKeyGenerator:
                 key_name: avainparin haluttu nimi '''
         self.create_directorys_and_files()
 
-        json_private_key = {'KeyPair':[
-            {"Key_name": key_name},
-            {"Public_key": [
-                {"modulus": public_key.get_modulus()},
-                {"exponent": public_key.get_exponent()}
-                ]},
-            {"Private_key": [
-                {"modulus": private_key.get_modulus()},
-                {"exponent": private_key.get_exponent()}
-                ]}
-        ]}
+        json_private_key = {
+            'key_pair':{
+                "key_name": key_name,
+                "public_key": {
+                        "modulus": public_key.get_modulus(),
+                        "exponent": public_key.get_exponent()
+                },
+                "private_key": {
+                        "modulus": private_key.get_modulus(),
+                        "exponent": private_key.get_exponent()
+                    }
+            }
+        }
 
-        json_public_key = {'KeyPair':[
-            {"Key_name": key_name},
-            {"Public_key": [
-                {"modulus": public_key.get_modulus()},
-                {"exponent": public_key.get_exponent()}
-                ]}
-        ]}
+        json_public_key = {
+            'key_pair':{
+                "key_name": key_name,
+                "public_key": {
+                        "modulus": public_key.get_modulus(),
+                        "exponent": public_key.get_exponent()
+                }
+            }   
+        }
 
         with open('./keys/private_keys/'+key_name.lower(), 'w') as new_file:
             new_file.write(json.dumps(json_private_key, indent=4))

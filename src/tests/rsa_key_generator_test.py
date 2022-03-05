@@ -22,18 +22,18 @@ class TestRsaGenerator(unittest.TestCase):
     def test_key_name_is_correct(self):
         with open(self.public_key_path+self.key_name.lower(), 'r') as new_file:
             json_data = json.load(new_file)
-            self.assertEqual(json_data['KeyPair'][0]['Key_name'], self.key_name)
+            self.assertEqual(json_data['key_pair']['key_name'], self.key_name)
 
         with open(self.private_key_path+self.key_name.lower(), 'r') as new_file:
             json_data = json.load(new_file)
-            self.assertEqual(json_data['KeyPair'][0]['Key_name'], self.key_name)
+            self.assertEqual(json_data['key_pair']['key_name'], self.key_name)
     
     def test_key_file_has_public_key(self):
         with open(self.public_key_path+self.key_name.lower(), 'r') as new_file:
             json_data = json.load(new_file)
-        self.assertIn('Public_key', str(json_data['KeyPair'][1]))
+        self.assertIn('public_key', str(json_data['key_pair']))
 
     def test_key_file_has_private_key(self):
         with open(self.private_key_path+self.key_name.lower(), 'r') as new_file:
             json_data = json.load(new_file)
-        self.assertIn('Private_key', str(json_data['KeyPair'][2]))
+        self.assertIn('private_key', str(json_data['key_pair']))

@@ -21,12 +21,13 @@ class CertificateModule:
                 certificate_key: avain jolla passi allekirjoitetaan.
         '''
         json_object = {
-            "Opiskelijapassi":[
-                {"Nimi": certificate_name.lower()},
-                {"Oppilaitos": certificate_academy.lower()},
-                {"Opiskelijanumero": certificate_student_number.lower()},
-                {"Voimassaolo":certificate_validity.lower()}],
-            "Allekirjoitus":""
+            "opiskelijapassi":{
+                "nimi": certificate_name.lower(),
+                "oppilaitos": certificate_academy.lower(),
+                "opiskelijanumero": certificate_student_number.lower(),
+                "voimassaolo":certificate_validity.lower()
+                },
+            "allekirjoitus":""
             }
 
         if not os.path.isdir('opiskelijapassit'):
@@ -45,7 +46,7 @@ class CertificateModule:
                 palauttaa julkisen avaimen tiedot'''
         try:
             json_data = json.load(open('./keys/public_keys/'+key_name.lower(), 'rb'))
-            return json_data['KeyPair'][1]
+            return json_data['key_pair']['public_key']
         except:
             print('Avainta ei löytynyt')
 
@@ -58,7 +59,7 @@ class CertificateModule:
                 palauttaa yksityisen avaimen tiedot'''
         try:
             json_data = json.load(open('./keys/private_keys/'+key_name.lower(), 'rb'))
-            return json_data['KeyPair'][2]
+            return json_data['key_pair']['private_key']
         except:
             print('Avainta ei löytynyt')
 
@@ -71,10 +72,10 @@ class CertificateModule:
 
         private_key = self.get_private_key(certificate_key)
         if private_key is not None:
-            modulus = private_key['Private_key'][0]['modulus']
-            exponent = private_key['Private_key'][1]['exponent']
+            modulus = private_key['modulus']
+            exponent = private_key['exponent']
             json_data = json.load(open('./opiskelijapassit/'+certificate_name.lower(), 'r'))
-            json_data['Allekirjoitus'] = pow(int(hashlib.sha1(str(json_data['Opiskelijapassi'])
+            json_data['allekirjoitus'] = pow(int(hashlib.sha1(str(json_data['opiskelijapassi'])
             .encode('utf-8')).hexdigest(),16), exponent, modulus)
             json.dump(json_data, open('./opiskelijapassit/'+certificate_name.lower(), 'w'), indent=4) #pylint: disable=line-too-long
 
@@ -86,7 +87,7 @@ class CertificateModule:
         Returns: allekirjoitetun tiivisteen'''
         try:
             json_data = json.load(open('./opiskelijapassit/'+document.lower(), 'rb'))
-            return json_data['Allekirjoitus']
+            return json_data['allekirjoitus']
         except:
             print('Virhe, allekirjoitusta ei löytynyt')
 
@@ -98,7 +99,7 @@ class CertificateModule:
             opiskelijan tiedot'''
         try:
             json_data = json.load(open('./opiskelijapassit/'+certificate.lower(), 'rb'))
-            parsed_json_data = f'Opiskelijpassin tiedot:\n\nNimi: {json_data["Opiskelijapassi"][0]["Nimi"]}\nOppilaitos: {json_data["Opiskelijapassi"][1]["Oppilaitos"]}\nOpiskelijanumero: {json_data["Opiskelijapassi"][2]["Opiskelijanumero"]}\nVoimassaolo: {json_data["Opiskelijapassi"][3]["Voimassaolo"]}' #pylint: disable=line-too-long
+            parsed_json_data = f'Opiskelijpassin tiedot:\n\nNimi: {json_data["opiskelijapassi"]["nimi"]}\nOppilaitos: {json_data["opiskelijapassi"]["oppilaitos"]}\nOpiskelijanumero: {json_data["opiskelijapassi"]["opiskelijanumero"]}\nVoimassaolo: {json_data["opiskelijapassi"]["voimassaolo"]}' #pylint: disable=line-too-long
             return parsed_json_data
         except:
             print('Opiskelijapassin dataa ei löytynyt')
@@ -119,12 +120,12 @@ class CertificateModule:
         public_key = self.get_public_key(key_to_use)
 
         if encrypted_signature is not None and public_key is not None:
-            modulus = public_key['Public_key'][0]['modulus']
-            exponent = public_key['Public_key'][1]['exponent']
+            modulus = public_key['modulus']
+            exponent = public_key['exponent']
             decrypted_signature = pow(int(encrypted_signature), exponent, modulus)
 
             json_data = json.load(open('./opiskelijapassit/'+certificate.lower(), 'rb'))
-            certificate_signature = int(hashlib.sha1(str(json_data['Opiskelijapassi'])
+            certificate_signature = int(hashlib.sha1(str(json_data['opiskelijapassi'])
             .encode('utf-8')).hexdigest(),16)
 
             if certificate_signature == decrypted_signature:
