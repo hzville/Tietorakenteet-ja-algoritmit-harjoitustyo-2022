@@ -1,6 +1,5 @@
 import unittest, json
 from components.certificate_module import CertificateModule
-from components.private_key import PrivateKey
 
 class TestCertificateModule(unittest.TestCase):
     def setUp(self):

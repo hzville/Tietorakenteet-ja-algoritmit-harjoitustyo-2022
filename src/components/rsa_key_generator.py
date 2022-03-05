@@ -1,7 +1,8 @@
 import math, os, json #pylint: disable=multiple-imports
 from components.prime_generator import PrimeGenerator
-from components.public_key import PublicKey
-from components.private_key import PrivateKey
+# from components.public_key import Key
+# from components.private_key import PrivateKey
+from components.key import Key
 
 
 class RsaKeyGenerator:
@@ -37,11 +38,13 @@ class RsaKeyGenerator:
             self.second_prime = self.prime_generator.get_new_prime(int(self.prime_size))
             if self.first_prime != self.second_prime:
                 self.modulus = self.first_prime * self.second_prime
-                public_key = PublicKey(self.modulus, self.public_key_exponent)
+                public_key = Key(self.modulus, self.public_key_exponent)
                 private_key = self.generate_private_key()
                 self.save_key_pair(public_key, private_key, key_name)
             else:
                 print('Virhe, avaimien luonti ei onnistunut')
+        self.first_prime = None
+        self.second_prime = None
         return public_key, private_key
 
     def generate_private_key(self):
@@ -49,7 +52,7 @@ class RsaKeyGenerator:
         Returns: palauttaa yksityisen avaimen PrivateKey oliona'''
         key_lambda = (self.first_prime-1) * (self.second_prime-1)//math.gcd(self.first_prime-1 , self.second_prime-1) #pylint: disable=line-too-long
         private_key_exponent = pow(self.public_key_exponent, -1, key_lambda)
-        return PrivateKey(self.modulus, private_key_exponent)
+        return Key(self.modulus, private_key_exponent)
 
     def save_key_pair(self, public_key, private_key, key_name):
         ''' Luo tarvittavat kansiot tallentaa muodostetun avainparin kansion "keys" sisälle.

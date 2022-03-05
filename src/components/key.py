@@ -1,12 +1,12 @@
 
-class PublicKey:
-    ''' Luokka jolla määritellään julkinen avain.
+class Key:
+    ''' Luokka, jolla määritellään yksityinen avain.
     Attributes:
         modulus:  avaimen modulaarinen arvo, tarvittava laskennallinen arvo
         exponent: avaimen eksponentti, tarvittava laskennallinen arvo'''
 
     def __init__(self, modulus, exponent):
-        '''Konstruktori joka luo uuden julkisen avaimen.
+        '''Konstruktori joka luo uuden yksityisen avaimen.
         Alustaa modulaarin ja exponentin arvon'''
         self.modulus = modulus
         self.exponent = exponent
