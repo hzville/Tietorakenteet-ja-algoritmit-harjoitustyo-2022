@@ -1,4 +1,4 @@
-import os
+import os, json
 from tkinter.ttk import Label, Frame, Button
 from tkinter import constants, filedialog
 from components.certificate_module import CertificateModule
@@ -70,7 +70,7 @@ class NewValidationView: #pylint: disable=too-many-instance-attributes
 
     def check_certificate(self):
         result = self.certificate_module.validate_certificate(self.chosen_certificate_name, self.key) #pylint: disable=line-too-long
-        certificate_data = self.certificate_module.get_certificate_data(self.chosen_certificate_name) #pylint: disable=line-too-long
+        certificate_data = self.get_certificate_data_for_ui(self.chosen_certificate_name) #pylint: disable=line-too-long
         self.certificate_data_label.config(text=certificate_data)
         self.certificate_data_label.grid(row=5, column=0)
         if result:
@@ -79,6 +79,14 @@ class NewValidationView: #pylint: disable=too-many-instance-attributes
         else:
             self.result_label.config(text='INVALID', background='red', font=('Arial',30))
             self.result_label.grid(row=5, column=1)
+
+    def get_certificate_data_for_ui(self, certificate):
+        try:
+            json_data = json.load(open('./opiskelijapassit/'+certificate.lower(), 'rb'))
+            parsed_json_data = f'Opiskelijpassin tiedot:\n\nNimi: {json_data["opiskelijapassi"]["nimi"]}\nOppilaitos: {json_data["opiskelijapassi"]["oppilaitos"]}\nOpiskelijanumero: {json_data["opiskelijapassi"]["opiskelijanumero"]}\nVoimassaolo: {json_data["opiskelijapassi"]["voimassaolo"]}' #pylint: disable=line-too-long
+            return parsed_json_data
+        except:
+            return 'Opiskelijapassin dataa ei löytynyt'
 
     def pack(self):
         self.frame.pack(fill=constants.X)

@@ -1,14 +1,21 @@
-import unittest, json
+import unittest, json, os
 from components.rsa_key_generator import RsaKeyGenerator
 
 class TestRsaGenerator(unittest.TestCase):
-    def setUp(self):
+    
+    @classmethod
+    def setUpClass(self):
         self.rsa_key_generator = RsaKeyGenerator()
         self.public_key = None
         self.private_key = None
-        self.key_name = 'test-key'
+        self.key_name = 'rsa_test-key'
         self.private_key_path ='./keys/private_keys/'
         self.public_key_path ='./keys/public_keys/'
+
+    @classmethod
+    def tearDownClass(self):
+        os.remove(self.private_key_path+self.key_name)
+        os.remove(self.public_key_path+self.key_name)
 
     def test_generate_new_key(self):
         self.rsa_key_generator.generate_new_key(self.key_name)
@@ -37,3 +44,5 @@ class TestRsaGenerator(unittest.TestCase):
         with open(self.private_key_path+self.key_name.lower(), 'r') as new_file:
             json_data = json.load(new_file)
         self.assertIn('private_key', str(json_data['key_pair']))
+
+

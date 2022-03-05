@@ -1,4 +1,3 @@
-
 class Key:
     ''' Luokka, jolla määritellään yksityinen avain.
     Attributes:

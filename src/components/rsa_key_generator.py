@@ -1,7 +1,5 @@
-import math, os, json #pylint: disable=multiple-imports
+import math, os, json
 from components.prime_generator import PrimeGenerator
-# from components.public_key import Key
-# from components.private_key import PrivateKey
 from components.key import Key
 
 
@@ -60,7 +58,7 @@ class RsaKeyGenerator:
                 public_key: julkinen avain
                 private_key: yksityinen avain
                 key_name: avainparin haluttu nimi '''
-        self.create_directorys_and_files()
+        self.create_directories()
 
         json_private_key = {
             'key_pair':{
@@ -83,7 +81,7 @@ class RsaKeyGenerator:
                         "modulus": public_key.get_modulus(),
                         "exponent": public_key.get_exponent()
                 }
-            }   
+            }
         }
 
         with open('./keys/private_keys/'+key_name.lower(), 'w') as new_file:
@@ -94,7 +92,7 @@ class RsaKeyGenerator:
             new_file.write(json.dumps(json_public_key, indent=4))
         new_file.close()
 
-    def create_directorys_and_files(self):
+    def create_directories(self):
         '''Luo tarvittavat kansiot avaimille'''
         if not os.path.isdir('keys'):
             os.mkdir('keys')

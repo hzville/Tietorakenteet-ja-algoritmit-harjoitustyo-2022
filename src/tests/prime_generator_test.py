@@ -20,19 +20,19 @@ class TestPrimeGenerator(unittest.TestCase):
 
     def test_check_if_even_number_is_not_prime(self):
         result = self.prime_generator.check_if_prime(830)
-        self.assertEqual(result, False)
+        self.assertFalse(result)
         result = self.prime_generator.check_if_prime(532)
-        self.assertEqual(result, False)
+        self.assertFalse(result)
         result = self.prime_generator.check_if_prime(14)
-        self.assertEqual(result, False)
+        self.assertFalse(result)
         result = self.prime_generator.check_if_prime(6)
-        self.assertEqual(result, False)
+        self.assertFalse(result)
         result = self.prime_generator.check_if_prime(88328)
-        self.assertEqual(result, False)
+        self.assertFalse(result)
 
     def test_check_if_prime_number_with_2(self):
         result = self.prime_generator.check_if_prime(2)
-        self.assertEqual(result, True)
+        self.assertTrue(result)
 
     def test_check_known_prime_numbers(self):
         for prime in list_of_primes:

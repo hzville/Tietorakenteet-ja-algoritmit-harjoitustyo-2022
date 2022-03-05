@@ -1,4 +1,4 @@
-import hashlib, json, os #pylint: disable=multiple-imports
+import hashlib, json, os
 
 class CertificateModule:
     ''' Luokka jolla luodaan ja allekirjoitetaan Opiskelijapassi'''
@@ -48,7 +48,7 @@ class CertificateModule:
             json_data = json.load(open('./keys/public_keys/'+key_name.lower(), 'rb'))
             return json_data['key_pair']['public_key']
         except:
-            print('Avainta ei löytynyt')
+            return 'Avainta ei löytynyt'
 
 
     def get_private_key(self, key_name):
@@ -61,7 +61,7 @@ class CertificateModule:
             json_data = json.load(open('./keys/private_keys/'+key_name.lower(), 'rb'))
             return json_data['key_pair']['private_key']
         except:
-            print('Avainta ei löytynyt')
+            return 'Avainta ei löytynyt'
 
     def sign_certificate(self,certificate_name, certificate_key):
         ''' Muodostaa tiivisteen opiskelijapassin datasta ja allekirjoittaa tiivisteen
@@ -89,20 +89,7 @@ class CertificateModule:
             json_data = json.load(open('./opiskelijapassit/'+document.lower(), 'rb'))
             return json_data['allekirjoitus']
         except:
-            print('Virhe, allekirjoitusta ei löytynyt')
-
-    def get_certificate_data(self, certificate):
-        '''Etsii opiskelijapassista oppilaan tiedot ja palauttaa ne.
-        Args:
-            certificate: opiskelijapassi mistä tiedot haetaan
-        Returns:
-            opiskelijan tiedot'''
-        try:
-            json_data = json.load(open('./opiskelijapassit/'+certificate.lower(), 'rb'))
-            parsed_json_data = f'Opiskelijpassin tiedot:\n\nNimi: {json_data["opiskelijapassi"]["nimi"]}\nOppilaitos: {json_data["opiskelijapassi"]["oppilaitos"]}\nOpiskelijanumero: {json_data["opiskelijapassi"]["opiskelijanumero"]}\nVoimassaolo: {json_data["opiskelijapassi"]["voimassaolo"]}' #pylint: disable=line-too-long
-            return parsed_json_data
-        except:
-            print('Opiskelijapassin dataa ei löytynyt')
+            return 'Virhe, allekirjoitusta ei löytynyt'
 
 
     def validate_certificate(self, certificate, key_to_use):
@@ -128,9 +115,6 @@ class CertificateModule:
             certificate_signature = int(hashlib.sha1(str(json_data['opiskelijapassi'])
             .encode('utf-8')).hexdigest(),16)
 
-            if certificate_signature == decrypted_signature:
-                return True
-            else:
-                return False
-        else:
-            print('Tarkista Opiskelijapassin ja avaimen nimi\n')
+            return certificate_signature == decrypted_signature
+
+        return 'Tarkista Opiskelijapassin ja avaimen nimi\n'
