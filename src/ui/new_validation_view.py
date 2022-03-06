@@ -34,9 +34,9 @@ class NewValidationView: #pylint: disable=too-many-instance-attributes
         self.result_label = Label(master=self.frame)
         self.certificate_data_label = Label(master=self.frame)
 
-        main_label.grid(row=1, column=1)
-        certificate_label.grid(row=2, column=0)
-        key_label.grid(row=3)
+        main_label.grid(row=1, column=1, padx=5, pady=5)
+        certificate_label.grid(row=2, column=0, padx=5, pady=5)
+        key_label.grid(row=3, padx=5, pady=5)
 
 
     def create_buttons(self):
@@ -48,37 +48,38 @@ class NewValidationView: #pylint: disable=too-many-instance-attributes
                                 command=self.create_main_view)
         check_certificate_button = Button(master=self.frame, text='Tarkista opiskelijapassi',
                                 command=self.check_certificate)
-        self.choose_certificate_button.grid(row=2, column=1)
-        self.choose_key_button.grid(row=3, column=1)
-        return_main_view_button.grid(row=4, column=2)
-        check_certificate_button.grid(row=4, column=0)
+        self.choose_certificate_button.grid(row=2, column=1, padx=5, pady=5)
+        self.choose_key_button.grid(row=3, column=1, padx=5, pady=5)
+        return_main_view_button.grid(row=4, column=2, padx=5, pady=5)
+        check_certificate_button.grid(row=4, column=0, padx=5, pady=5)
 
 
     def choose_certificate(self):
         file_path = filedialog.askopenfilename()
         self.chosen_certificate_name = os.path.basename(file_path)
-        self.choose_certificate_button.grid(row=2, column=2)
+        self.choose_certificate_button.grid(row=2, column=2, padx=5, pady=5)
         self.chosen_certificate_label.configure(text=self.chosen_certificate_name)
-        self.chosen_certificate_label.grid(row=2, column=1)
+        self.chosen_certificate_label.grid(row=2, column=1, padx=5, pady=5)
 
     def choose_key(self):
         file_path = filedialog.askopenfilename()
         self.key = os.path.basename(file_path)
-        self.choose_key_button.grid(row=3, column=2)
+        self.choose_key_button.grid(row=3, column=2, padx=5, pady=5)
         self.chosen_key_label.configure(text=self.key)
-        self.chosen_key_label.grid(row=3, column=1)
+        self.chosen_key_label.grid(row=3, column=1, padx=5, pady=5)
 
     def check_certificate(self):
         result = self.certificate_module.validate_certificate(self.chosen_certificate_name, self.key) #pylint: disable=line-too-long
         certificate_data = self.get_certificate_data_for_ui(self.chosen_certificate_name) #pylint: disable=line-too-long
         self.certificate_data_label.config(text=certificate_data)
-        self.certificate_data_label.grid(row=5, column=0)
+        self.certificate_data_label.grid(row=6, column=1, padx=5, pady=5)
         if result:
-            self.result_label.config(text='VALID', background='green', font=('Arial',30))
-            self.result_label.grid(row=5, column=1)
+            self.result_label.config(text='Passi on kelvollinen', background='green',
+            font=('Arial',30))
+            self.result_label.grid(row=5, column=1, padx=5, pady=5)
         else:
-            self.result_label.config(text='INVALID', background='red', font=('Arial',30))
-            self.result_label.grid(row=5, column=1)
+            self.result_label.config(text='Passi on epäkelpo', background='red', font=('Arial',30))
+            self.result_label.grid(row=5, column=1, padx=5, pady=5)
 
     def get_certificate_data_for_ui(self, certificate):
         try:

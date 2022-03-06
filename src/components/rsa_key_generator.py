@@ -39,11 +39,8 @@ class RsaKeyGenerator:
                 public_key = Key(self.modulus, self.public_key_exponent)
                 private_key = self.generate_private_key()
                 self.save_key_pair(public_key, private_key, key_name)
-            else:
-                print('Virhe, avaimien luonti ei onnistunut')
         self.first_prime = None
         self.second_prime = None
-        return public_key, private_key
 
     def generate_private_key(self):
         ''' Luo yksityisen avaimen

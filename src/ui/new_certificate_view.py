@@ -26,7 +26,7 @@ class NewCertificateView: #pylint: disable=too-many-instance-attributes
         self.create_inputs()
 
     def create_labels(self):
-        main_label = Label(master=self.frame, text='Anna opiskelijan tiedot:')
+        main_label = Label(master=self.frame, text='Anna opiskelijan tiedot')
         name_label = Label(master=self.frame, text='Nimi:')
         academy_label = Label(master=self.frame, text='Oppilaitos:')
         student_number_label = Label(master=self.frame, text='Opiskelijanumero:')
@@ -34,12 +34,12 @@ class NewCertificateView: #pylint: disable=too-many-instance-attributes
         key_label = Label(master=self.frame, text='Avain:')
         self.file_label = Label(master=self.frame)
 
-        main_label.grid(row=1)
-        name_label.grid(row=2)
-        academy_label.grid(row=3)
-        student_number_label.grid(row=4)
-        certificate_validity_label.grid(row=5)
-        key_label.grid(row=6)
+        main_label.grid(row=1, column=1, padx=5, pady=5)
+        name_label.grid(row=2, padx=5, pady=5)
+        academy_label.grid(row=3, padx=5, pady=5)
+        student_number_label.grid(row=4, padx=5, pady=5)
+        certificate_validity_label.grid(row=5, padx=5, pady=5)
+        key_label.grid(row=6, padx=5, pady=5)
 
     def create_buttons(self):
         create_new_certificate_button = Button(master=self.frame, text='Luo uusi Opiskelijapassi',
@@ -49,9 +49,9 @@ class NewCertificateView: #pylint: disable=too-many-instance-attributes
         self.open_file_button = Button(master=self.frame, text='Valitse avain',
                                 command=self.choose_key)
 
-        create_new_certificate_button.grid(row=7, column=0)
-        create_main_view_button.grid(row=7, column=2)
-        self.open_file_button.grid(row=6, column=1)
+        create_new_certificate_button.grid(row=8, column=0, padx=5, pady=5)
+        create_main_view_button.grid(row=8, column=2, padx=5, pady=5)
+        self.open_file_button.grid(row=6, column=1, padx=5, pady=5)
 
     def create_inputs(self):
         name_entry = Entry(master=self.frame, textvariable=self.name_var)
@@ -61,17 +61,17 @@ class NewCertificateView: #pylint: disable=too-many-instance-attributes
         certificate_validity_entry = Entry(master=self.frame,
         textvariable=self.certificate_validity_var)
 
-        name_entry.grid(row=2, column=1)
-        academy_entry.grid(row=3, column=1)
-        student_number_entry.grid(row=4, column=1)
-        certificate_validity_entry.grid(row=5, column=1)
+        name_entry.grid(row=2, column=1, padx=5, pady=5)
+        academy_entry.grid(row=3, column=1, padx=5, pady=5)
+        student_number_entry.grid(row=4, column=1, padx=5, pady=5)
+        certificate_validity_entry.grid(row=5, column=1, padx=5, pady=5)
 
     def choose_key(self):
         file_path = filedialog.askopenfilename()
         self.key_var = os.path.basename(file_path)
-        self.open_file_button.grid(row=6, column=2)
+        self.open_file_button.grid(row=6, column=2, padx=5, pady=5)
         self.file_label.configure(text=self.key_var)
-        self.file_label.grid(row=6, column=1)
+        self.file_label.grid(row=6, column=1, padx=5, pady=5)
 
     def create_new_certificate(self):
         self.certificate_module.create_new_certificate(
@@ -81,6 +81,8 @@ class NewCertificateView: #pylint: disable=too-many-instance-attributes
             self.certificate_validity_var.get(),
             self.key_var
         )
+        cert_created_label = Label(master=self.frame, text='Uusi opiskelijapassi luotu')
+        cert_created_label.grid(row=7, column=1, padx=5, pady=5)
 
     def pack(self):
         self.frame.pack(fill=constants.X)
