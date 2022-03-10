@@ -13,6 +13,7 @@ class TestCertificateModule(unittest.TestCase):
         self.student_number = 'test studet number'
         self.validity = 'test validity'
         self.key_name = 'test-key'
+        self.key_path = './keys/private_keys/'+self.key_name
         self.path = './opiskelijapassit/'
         self.certificate_key = self.rsa_key_generator.generate_new_key(self.key_name)
         self.test_certificate = self.certificate_module.create_new_certificate(
@@ -20,7 +21,7 @@ class TestCertificateModule(unittest.TestCase):
             self.academy,
             self.student_number,
             self.validity,
-            self.key_name
+            self.key_path
         )
 
     @classmethod
@@ -46,11 +47,11 @@ class TestCertificateModule(unittest.TestCase):
             new_file.close()
     
     def test_certificate_signature_is_valid(self):
-        result = self.certificate_module.validate_certificate(self.name, self.key_name)
+        result = self.certificate_module.validate_certificate('./opiskelijapassit/'+self.name, './keys/public_keys/'+self.key_name)
         self.assertTrue(result)
     
     def test_certificate_signature_is_invalid_with_wrong_key(self):
         invalid_key_name = 'wrong-key'
         self.rsa_key_generator.generate_new_key(invalid_key_name)
-        result = self.certificate_module.validate_certificate(self.name, invalid_key_name)
+        result = self.certificate_module.validate_certificate('./opiskelijapassit/'+self.name, './keys/public_keys/'+invalid_key_name.lower())
         self.assertFalse(result)
