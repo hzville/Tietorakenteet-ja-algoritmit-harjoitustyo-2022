@@ -12,7 +12,7 @@ class RsaKeyGenerator:
         first_prime: ensimmäinen tarvittava alkuluku
         second_prime: toinen tarvittava alkuluku
         modulus: salauksessa tarvittava luku
-        public_key_exponent: julkisen avaimen eksponentti, yksi yleisesti käytetty luku on 65537'''
+        public_key_exponent: julkisen avaimen eksponentti, eräs yleisesti käytetty luku on 65537'''
 
     def __init__(self):
         ''' Konstruktori joka luo uuden RsaKeyGeneraattorin.
@@ -44,13 +44,13 @@ class RsaKeyGenerator:
 
     def generate_private_key(self):
         ''' Luo yksityisen avaimen
-        Returns: palauttaa yksityisen avaimen PrivateKey oliona'''
+        Returns: palauttaa yksityisen avaimen'''
         key_lambda = (self.first_prime-1) * (self.second_prime-1)//math.gcd(self.first_prime-1 , self.second_prime-1) #pylint: disable=line-too-long
         private_key_exponent = pow(self.public_key_exponent, -1, key_lambda)
         return Key(self.modulus, private_key_exponent)
 
     def save_key_pair(self, public_key, private_key, key_name):
-        ''' Luo tarvittavat kansiot tallentaa muodostetun avainparin kansion "keys" sisälle.
+        ''' Luo tarvittavat kansiot ja tallentaa muodostetun avainparin kansion "keys" sisälle.
             Args:
                 public_key: julkinen avain
                 private_key: yksityinen avain

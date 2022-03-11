@@ -2,6 +2,7 @@ from tkinter import Tk
 from ui.ui import Ui
 
 def main():
+    '''Alustaa käyttöliittymän ja käynnistää sovelluksen'''
     window = Tk()
     window.geometry("600x600")
     window.title('Opiskelijapassi')

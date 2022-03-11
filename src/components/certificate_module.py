@@ -1,7 +1,7 @@
 import hashlib, json, os
 
 class CertificateModule:
-    ''' Luokka jolla luodaan ja allekirjoitetaan Opiskelijapassi'''
+    ''' Luokka jolla luodaan ja allekirjoitetaan opiskelijapassi'''
 
     def create_new_certificate(self,
     name,
@@ -9,9 +9,9 @@ class CertificateModule:
     student_number,
     validity,
     key_path):
-        ''' Pyytää käyttäjältä tarvittavat tiedot kuten opiskelijan nimen, oppilaitoksen,
-            opiskelijanumeron ja passin voimassaoloajan. Luo näiden perusteella uuden
-            dokumentin juurikansioon sekä allekirjoittaa dokumentin käyttäjän valitsemalla
+        ''' Luo uuden opiskelijapassin annettujen parametrien perusteella.
+            Opiskelijapassi sijoitetaan opiskelijapassit kansion sisään ja 
+            allekirjoitetaan käyttäjän valitsemalla
             avaimella.
             Args:
                 name: opiskelijan nimi,
@@ -41,7 +41,7 @@ class CertificateModule:
     def get_public_key(self, key_path):
         '''Etsii julkisen avaimen halutusta tiedostosta.
             Args:
-                key_path: avaimen nimi
+                key_path: avaimen sijainti
             Returns:
                 palauttaa julkisen avaimen tiedot'''
         try:
@@ -54,7 +54,7 @@ class CertificateModule:
     def get_private_key(self, key_path):
         '''Etsii yksityisen avaimen halutusta tiedostosta.
             Args:
-                key_path: avaimen nimi
+                key_path: avaimen sijainti
             Returns:
                 palauttaa yksityisen avaimen tiedot'''
         try:
@@ -68,7 +68,7 @@ class CertificateModule:
             halutulla yksityisellä avaimella. Lisää opiskelijapassiin allekirjoitetun tiivisteen
             Args:
                 name: opiskelijapassin nimi,
-                key_path: avain jolla opiskelijapassi allekirjoitetaan'''
+                key_path: avaimen sijainti, jolla opiskelijapassi allekirjoitetaan'''
 
         private_key = self.get_private_key(key_path)
         if private_key is not None:
@@ -95,8 +95,8 @@ class CertificateModule:
         ''' Todentaa opiskelijapassin allekirjoituksen purkamalla sen julkisella avaimella.
             Varmistaa myös että dokumentti on säilynyt muuttumattomana
         Args:
-            certificate_path: tarkistettava opiskelijapassi
-            key_to_use: tarkistukseen käytettävä julkinen avain
+            certificate_path: tarkistettava opiskelijapassin sijainti
+            key_to_use: tarkistukseen käytettävä julkisen avaimen sijainti
         Returns:
             True: jos opiskelijapassin purettu allekirjoitus täsmää opiskelijapassin tietoihin.
             False: jos opiskelijapassin purettu allekirjoitus ei täsmää opiskelijan tietoihin.

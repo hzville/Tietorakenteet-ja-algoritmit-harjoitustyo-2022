@@ -2,6 +2,15 @@ from tkinter import ttk, constants, PhotoImage
 from tkinter.ttk import Button, Label
 
 class MainView:
+    ''' Luo uuden päävalikon
+    Attributes:
+        self.root: kehyksen juurikomponentti
+        self.frame: kehys näkymän näyttämiseen
+        self.certificate_view: uuden opiskelijapassin näkymä
+        self.rsakey_view: uuden RSA-avaimen näkymä
+        self.validation_view: opiskelijapassin tarkistusnäkymä
+        self.opiskelijapassi_img: päävalikon kuva
+    '''
 
     def __init__(self, root, certificate_view, rsakey_view, validation_view ):
         self.root = root
@@ -12,14 +21,8 @@ class MainView:
         self.opiskelijapassi_img = PhotoImage(file='./src/ui/images/opiskelijapassi_cut.png')
         self.initialize()
 
-    def pack(self):
-        self.frame.pack(fill=constants.X)
-
-    def destroy(self):
-        self.frame.destroy()
-
-
     def initialize(self):
+        '''Luo tarvittavat komponentit näkymään'''
         self.frame = ttk.Frame(master = self.root)
 
         image_label = Label(master = self.frame, image=self.opiskelijapassi_img)
@@ -38,3 +41,11 @@ class MainView:
         new_key_button = Button(master = self.frame, text = 'Luo uusi avainpari',
                             command=self.rsakey_view)
         new_key_button.pack(pady=10)
+
+    def pack(self):
+        '''Näkymän asettelu/alustus'''
+        self.frame.pack(fill=constants.X)
+
+    def destroy(self):
+        '''Näkymän tuhoaminen'''
+        self.frame.destroy()

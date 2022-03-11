@@ -4,6 +4,20 @@ from tkinter import StringVar, constants, filedialog
 from components.certificate_module import CertificateModule
 
 class NewCertificateView: #pylint: disable=too-many-instance-attributes
+    ''' Luo uuden opiskelijapassin luomiseen käytettävän näkymän
+    Attributes:
+        self.frame: kehys näkymän näyttämiseen,
+        self.create_main_view: päävalikon näkymä
+        self.certificate_module: passin tarkistukseen käytettävä CertificateModule moduuli
+        self.name_var: nimi syötekentän arvo
+        self.academy_var: oppilaitos syötekentän arvo
+        self.student_number_var: opiskelijanumero syötekentä arvo
+        self.validity_var: voimassaolo syötekentän arvo
+        self.key_path: avaimen sijainti
+        self.file_label: avaimen tekstikomponentti
+        self.open_file_button: painike avaimen valitsemiseen
+        self.info_label: ilmoitusten tekstikomponentti
+    '''
 
     def __init__(self, root, create_main_view):
         self.frame = Frame(master=root)
@@ -20,11 +34,13 @@ class NewCertificateView: #pylint: disable=too-many-instance-attributes
         self.initialize()
 
     def initialize(self):
+        '''Luo tarvittavat komponentit näkymään'''
         self.create_labels()
         self.create_buttons()
         self.create_inputs()
 
     def create_labels(self):
+        '''Luo tarvittavat tekstikomponentit'''
         Label(master=self.frame,text='Anna opiskelijan tiedot').grid(
             row=1, column=1, padx=5, pady=5)
         Label(master=self.frame, text='Nimi:').grid(
@@ -40,15 +56,17 @@ class NewCertificateView: #pylint: disable=too-many-instance-attributes
         self.info_label.grid(row=7, column=1, padx=5, pady=5)
 
     def create_buttons(self):
+        '''Luo tarvittavat painikkeet'''
         Button(master=self.frame, text='Luo uusi Opiskelijapassi',
             command=self.create_new_certificate).grid(row=8, column=0, padx=5, pady=5)
-        Button(master = self.frame, text='Takaisin päävalikkon',
+        Button(master = self.frame, text='Takaisin päävalikkoon',
             command=self.create_main_view).grid(row=8, column=2, padx=5, pady=5)
         self.open_file_button = Button(master=self.frame, text='Valitse avain',
                                     command=self.choose_key)
         self.open_file_button.grid(row=6, column=1, padx=5, pady=5)
 
     def create_inputs(self):
+        '''Luo tarvittavat syötekentät'''
         Entry(master=self.frame, textvariable=self.name_var).grid(
             row=2, column=1, padx=5, pady=5)
         Entry(master=self.frame, textvariable=self.academy_var).grid(
@@ -59,12 +77,14 @@ class NewCertificateView: #pylint: disable=too-many-instance-attributes
             row=5, column=1, padx=5, pady=5)
 
     def choose_key(self):
+        '''Metodi avaimen valitsemiseen'''
         self.key_path = filedialog.askopenfilename(initialdir='./')
         self.open_file_button.grid(row=6, column=2, padx=5, pady=5)
         self.file_label.configure(text=os.path.basename(self.key_path))
         self.file_label.grid(row=6, column=1, padx=5, pady=5)
 
     def create_new_certificate(self):
+        '''Metodi avaimen luomiseen'''
         entry_checker = []
         entry_checker.append(self.name_var.get())
         entry_checker.append(self.academy_var.get())
@@ -85,7 +105,9 @@ class NewCertificateView: #pylint: disable=too-many-instance-attributes
             self.info_label.config(text='Tietoja puuttuu, täytä kaikki kentät')
 
     def pack(self):
+        '''Näkymän asettelu/alustus'''
         self.frame.pack(fill=constants.X)
 
     def destroy(self):
+        '''Näkymän tuhoaminen'''
         self.frame.destroy()

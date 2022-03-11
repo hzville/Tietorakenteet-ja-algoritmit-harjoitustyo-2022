@@ -1,6 +1,6 @@
 ## Testausdokumentti
 
-Ohjelmaa testataan automaattisilla yksikkötesteillä Pythonin Pytestin avulla. Testit löytyvät projektin juurihakemiston src/tests kansiosta. Yksittäisten metodien testaamisen lisäksi, testisyötteenä on 10 000 alkulukua ja 8770 yhdistettyä lukua. 
+Ohjelmaa testataan automaattisilla yksikkötesteillä Pythonin Pytestin avulla. Testit löytyvät projektin juurihakemiston src/tests kansiosta. Yksittäisten metodien,allekirjoituksen ja alkulukujen testaamisen lisäksi, testisyötteenä on 10 000 alkulukua ja 8770 yhdistettyä lukua.
 
 Testit voidaan suorittaa ja toistaa ajamalla komento: 
 
