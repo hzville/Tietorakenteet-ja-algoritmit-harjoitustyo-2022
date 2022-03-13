@@ -5,6 +5,8 @@
 
 ![main_menu](./dokumentaatio/images/main_menu.png)
 
+![diagram](./dokumentaatio//images/diagram.png)
+
 ## Käyttöohje
 
 - Ohjelma vaatii toimiakseen vähintään Python 3.8 version sekä Poetry-komentorivityökalun. Voit asentaa Poetryn osoitteesta https://python-poetry.org/ .

@@ -102,7 +102,7 @@ class NewValidationView: #pylint: disable=too-many-instance-attributes
             palauttaa opiskelijapassin datan'''
         try:
             json_data = json.load(open(certificate, 'rb'))
-            parsed_json_data = f'Opiskelijpassin tiedot:\n\nNimi: {json_data["opiskelijapassi"]["nimi"]}\nOppilaitos: {json_data["opiskelijapassi"]["oppilaitos"]}\nOpiskelijanumero: {json_data["opiskelijapassi"]["opiskelijanumero"]}\nVoimassaolo: {json_data["opiskelijapassi"]["voimassaolo"]}' #pylint: disable=line-too-long
+            parsed_json_data = f'Opiskelijapassin tiedot:\n\nNimi: {json_data["opiskelijapassi"]["nimi"]}\nOppilaitos: {json_data["opiskelijapassi"]["oppilaitos"]}\nOpiskelijanumero: {json_data["opiskelijapassi"]["opiskelijanumero"]}\nVoimassaolo: {json_data["opiskelijapassi"]["voimassaolo"]}' #pylint: disable=line-too-long
             return parsed_json_data
         except:
             return 'Opiskelijapassin dataa ei löytynyt'

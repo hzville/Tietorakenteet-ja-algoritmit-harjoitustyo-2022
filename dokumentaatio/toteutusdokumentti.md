@@ -6,13 +6,19 @@ Ohjelman on tarkoitus mahdollistaa digitaalinen allekirjoitus tiedoston datan pe
 
 Alussa ohjelma pyytää tarvittavia tietoja käyttäjältä, joista luodaan allekirjoitettava tiedosto. Tiedoston datasta luodaan tiiviste, jonka avulla voidaan varmistaa jälkikäteen että tiedoston sisältö ei ole muuttunut. Tiiviste allekirjoitetaan RSA-salausta käyttäen. Jälkikäteen tiiviste voidaan purkaa samaa salausta käyttäen ja todeta kuka on tiedoston allekirjoittanut ja että tiedoston sisältö on säilynyt muuttumattomana.
 
-Allekirjoitusta varten ohjelma luo satunnaisia alkulukuja joita voidaan käyttää RSA-salauksessa tarvittavien avaimien luomiseen. Kun alkuluvut on luotu, voidaan niistä laskea julkinen ja yksityinen avain. Yksityisellä avaimella allekirjoitetaan dokumentista luotu tiiviste ja julkisella avaimella voidaan varmistaa alkuperäinen allekirjoittaja. 
+Allekirjoitusta varten ohjelma luo satunnaisia alkulukuja joita voidaan käyttää RSA-salauksessa tarvittavien avaimien luomiseen. Kun alkuluvut on luotu, voidaan niistä laskea julkinen ja yksityinen avain. Yksityisellä avaimella allekirjoitetaan dokumentista luotu tiiviste ja julkisella avaimella voidaan todeta alkuperäinen allekirjoittaja. 
+
+Toteutuskaavio:
+
+![diagram](./images/diagram.png)
 
 ## Aika- ja tilavaativuudet
 
 Alkulukujen löytämiseen käytetään Miller-Rabin algoritmia. Miller-Rabin algoritmin aikavaatimus on O(k log^3n) missä k on suoritettujen kierrosten määrä ja n on testattava luku. 
 
 ## Puutteet ja parannusehdotukset
+
+Käyttöliittymässä on parantamisen varaa ja tiettyjen virhetilanteiden käsittelyssä.
 
 ## Lähteet
 
